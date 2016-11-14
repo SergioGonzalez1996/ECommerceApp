@@ -5,5 +5,25 @@
              BindingContext="{Binding Main, Source={StaticResource Locator}}"
              BackgroundColor="{StaticResource BackgroundColor}"
              Title="Productos">
-  <Label Text="Products Page" VerticalOptions="Center" HorizontalOptions="Center" />
+  <StackLayout
+      Padding="8">
+    <SearchBar
+      Placeholder="Buscar..."
+      Text="{Binding ProductsFilter, Mode=TwoWay}"
+      SearchCommand="{Binding SearchProductCommand}">
+    </SearchBar>
+    <Image
+      Source="barcode.png"
+      HorizontalOptions="End"
+      VerticalOptions="Center">
+      <Image.GestureRecognizers>
+        <TapGestureRecognizer Command="{Binding ScanProductCommand}"/>
+      </Image.GestureRecognizers>
+    </Image>
+    <ListView
+      ItemTemplate="{StaticResource ProductItemTemplate}"
+      ItemsSource="{Binding Products}"
+      HasUnevenRows="True">
+    </ListView>
+  </StackLayout>
 </ContentPage>

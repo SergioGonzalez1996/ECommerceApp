@@ -5,5 +5,20 @@
              BindingContext="{Binding Main, Source={StaticResource Locator}}"
              BackgroundColor="{StaticResource BackgroundColor}"
              Title="Clientes">
-  <Label Text="Customers Page" VerticalOptions="Center" HorizontalOptions="Center" />
+  <StackLayout
+      Padding="8">
+    <SearchBar
+      Placeholder="Buscar..."
+      Text="{Binding CustomersFilter, Mode=TwoWay}"
+      SearchCommand="{Binding SearchCustomerCommand}">
+    </SearchBar>
+    <ListView
+      ItemTemplate="{StaticResource CustomerItemTemplate}"
+      ItemsSource="{Binding Customers}"
+      HasUnevenRows="True">
+    </ListView>
+  </StackLayout>
+  <ContentPage.ToolbarItems>
+    <ToolbarItem Icon="ic_action_add.png" Command="{Binding NewCustomerCommand}"/>
+  </ContentPage.ToolbarItems>
 </ContentPage>

@@ -1,15 +1,26 @@
-﻿using ECommerceApp.Pages;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using ECommerceApp.Models;
+using ECommerceApp.Pages;
 using System.Threading.Tasks;
+using System;
+using ECommerceApp.ViewModels;
 
 namespace ECommerceApp.Services
 {
     public class NavigationService
     {
-        public async Task Navigate (string pageName)
+        #region Attributes
+        private DataService dataService; 
+        #endregion
+
+        #region Constructor
+        public NavigationService()
+        {
+            dataService = new DataService();
+        }
+        #endregion
+
+        #region Navigation
+        public async Task Navigate(string pageName)
         {
             App.Master.IsPresented = false;
 
@@ -35,7 +46,7 @@ namespace ECommerceApp.Services
                     break;
 
                 case "LogoutPage":
-                    await App.Navigator.PopToRootAsync();
+                    Logout();
                     break;
                 case "UserPage":
                     await App.Navigator.PopToRootAsync();
@@ -45,5 +56,28 @@ namespace ECommerceApp.Services
             }
 
         }
+        #endregion
+
+        #region Methods
+        private void Logout()
+        {
+            App.CurrentUser.IsRemembered = false;
+            dataService.UpdateUser(App.CurrentUser);
+            App.Current.MainPage = new LoginPage();
+        }
+
+        internal void SetMainPage(User user)
+        {
+            var mainViewModel = MainViewModel.GetInstance();
+            mainViewModel.LoadUser(user);
+            App.CurrentUser = user;
+            App.Current.MainPage = new MasterPage();
+        }
+
+        public User GetCurrentUser()
+        {
+            return App.CurrentUser;
+        }
+        #endregion
     }
 }

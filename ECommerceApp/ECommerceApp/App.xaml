@@ -2,20 +2,220 @@
 <Application xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:infra="clr-namespace:ECommerceApp.Infrastructure;assembly=ECommerceApp"
+             xmlns:controls="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin.Abstractions"
              x:Class="ECommerceApp.App">
   <Application.Resources>
     <ResourceDictionary>
       <!-- General colors -->
       <Color x:Key="MainColor">#F60A20</Color>
       <Color x:Key="FontColor">#262526</Color>
-      <Color x:Key="AccentColor1">#8C8979</Color>
-      <Color x:Key="AccentColor2">#404040</Color>
+      <Color x:Key="AccentColor">#8C8979</Color>
+      <Color x:Key="AccentColor1">#404040</Color>
       <Color x:Key="BackgroundColor">#F2F2F2</Color>
       <!-- Menu colors -->
       <Color x:Key="MenuColor">#262526</Color>
       <Color x:Key="MenuFontColor">#F2F2F2</Color>
       <!-- Locator -->
       <infra:InstanceLocator x:Key="Locator"></infra:InstanceLocator>
+      <!-- Data Templates -->
+      <DataTemplate x:Key="MenuItemTemplate">
+        <ViewCell>
+          <Grid>
+            <Grid.GestureRecognizers>
+              <TapGestureRecognizer Command="{Binding NavigateCommand}"/>
+            </Grid.GestureRecognizers>
+            <Grid.ColumnDefinitions>
+              <ColumnDefinition Width="Auto"></ColumnDefinition>
+              <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Image
+              Source="{Binding Icon}"
+              WidthRequest="50"
+              HeightRequest="50"/>
+            <Label
+              Grid.Column="1"
+              VerticalOptions="Center"
+              TextColor="{StaticResource MenuFontColor}"
+              Text="{Binding Title}"/>
+          </Grid>
+        </ViewCell>
+      </DataTemplate>
+      <!--  -->
+      <DataTemplate x:Key="ProductItemTemplate">
+        <ViewCell>
+          <Grid>
+            <Grid.ColumnDefinitions>
+              <ColumnDefinition Width="Auto"></ColumnDefinition>
+              <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Image
+              Source="{Binding ImageFullPath}"
+              VerticalOptions="Start"
+              WidthRequest="100"
+              HeightRequest="100"/>
+            <StackLayout Grid.Column="1">
+              <Label
+                FontAttributes="Bold"
+                VerticalOptions="Center"
+                TextColor="{StaticResource FontColor}"
+                Text="{Binding Description}"/>
+              <Label
+                VerticalOptions="Center"
+                TextColor="{StaticResource FontColor}"
+                Text="{Binding Price, StringFormat='Precio: {0:C2}'}"/>
+              <Label
+                VerticalOptions="Center"
+                TextColor="{StaticResource FontColor}"
+                Text="{Binding Stock, StringFormat='Stock: {0:N2}'}"/>
+            </StackLayout>
+          </Grid>
+        </ViewCell>
+      </DataTemplate>
+      <!--  -->
+      <DataTemplate x:Key="CustomerItemTemplate">
+        <ViewCell>
+          <Grid>
+            <Grid.GestureRecognizers>
+              <TapGestureRecognizer Command="{Binding CustomerDetailCommand}"/>
+            </Grid.GestureRecognizers>
+            <Grid.ColumnDefinitions>
+              <ColumnDefinition Width="Auto"></ColumnDefinition>
+              <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <controls:CircleImage
+              Source="{Binding PhotoFullPath}"
+              Aspect="AspectFill"
+              WidthRequest="100"
+              HeightRequest="100">
+            </controls:CircleImage>
+            <StackLayout Grid.Column="1">
+              <Label
+                FontAttributes="Bold"
+                VerticalOptions="Center"
+                TextColor="{StaticResource FontColor}"
+                Text="{Binding FullName}"/>
+              <Label
+                VerticalOptions="Center"
+                TextColor="{StaticResource FontColor}"
+                Text="{Binding UserName, StringFormat='EMail: {0}'}"/>
+              <Label
+                VerticalOptions="Center"
+                TextColor="{StaticResource FontColor}"
+                Text="{Binding Address, StringFormat='Dirección: {0}'}"/>
+              <Label
+                VerticalOptions="Center"
+                TextColor="{StaticResource FontColor}"
+                Text="{Binding Phone, StringFormat='Teléfono: {0}'}"/>
+            </StackLayout>
+          </Grid>
+        </ViewCell>
+      </DataTemplate>
+      <!--  -->
+      <DataTemplate x:Key="OrderItemTemplate">
+        <ViewCell>
+          <Grid>
+            <Grid.GestureRecognizers>
+              <TapGestureRecognizer Command="{Binding OrderDetailCommand}"/>
+            </Grid.GestureRecognizers>
+            <Grid.ColumnDefinitions>
+              <ColumnDefinition Width="*"></ColumnDefinition>
+              <ColumnDefinition Width="*"></ColumnDefinition>
+              <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Label
+              FontAttributes="Bold"
+              VerticalOptions="Center"
+              TextColor="{StaticResource FontColor}"
+              Text="{Binding Date, StringFormat='{0:yyyy/MM/dd}'}">
+            </Label>
+            <Label
+              Grid.Column="1"
+              VerticalOptions="Center"
+              TextColor="{StaticResource FontColor}"
+              Text="{Binding Customer.FullName}"/>
+            <Label
+              Grid.Column="2"
+              VerticalOptions="Center"
+              TextColor="{StaticResource FontColor}"
+              Text="{Binding State.Description}"/>
+          </Grid>
+        </ViewCell>
+      </DataTemplate>
+      <!--  -->
+      <DataTemplate x:Key="NewOrderItemTemplate">
+        <ViewCell>
+          <Grid>
+            <Grid.GestureRecognizers>
+              <TapGestureRecognizer Command="{Binding NewOrderDetailCommand}"/>
+            </Grid.GestureRecognizers>
+            <Grid.ColumnDefinitions>
+              <ColumnDefinition Width="*"></ColumnDefinition>
+              <ColumnDefinition Width="*"></ColumnDefinition>
+              <ColumnDefinition Width="*"></ColumnDefinition>
+              <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Label
+              FontAttributes="Bold"
+              VerticalOptions="Center"
+              TextColor="{StaticResource FontColor}"
+              Text="{Binding Product.Description}">
+            </Label>
+            <Label
+              Grid.Column="1"
+              VerticalOptions="Center"
+              HorizontalTextAlignment="End"
+              TextColor="{StaticResource FontColor}"
+              Text="{Binding Price}"/>
+            <Label
+              Grid.Column="2"
+              VerticalOptions="Center"
+              HorizontalTextAlignment="End"
+              TextColor="{StaticResource FontColor}"
+              Text="{Binding Quantity}"/>
+            <Label
+              Grid.Column="3"
+              VerticalOptions="Center"
+              HorizontalTextAlignment="End"
+              TextColor="{StaticResource FontColor}"
+              Text="{Binding Value}"/>
+          </Grid>
+        </ViewCell>
+      </DataTemplate>
+      <!--  -->
+      <DataTemplate x:Key="ProductItemTemplate2">
+        <ViewCell>
+          <Grid>
+            <Grid.GestureRecognizers>
+              <TapGestureRecognizer Command="{Binding AddProductToOrderCommand}"/>
+            </Grid.GestureRecognizers>
+            <Grid.ColumnDefinitions>
+              <ColumnDefinition Width="Auto"></ColumnDefinition>
+              <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Image
+              Source="{Binding ImageFullPath}"
+              VerticalOptions="Start"
+              WidthRequest="100"
+              HeightRequest="100"/>
+            <StackLayout Grid.Column="1">
+              <Label
+                FontAttributes="Bold"
+                VerticalOptions="Center"
+                TextColor="{StaticResource FontColor}"
+                Text="{Binding Description}"/>
+              <Label
+                VerticalOptions="Center"
+                TextColor="{StaticResource FontColor}"
+                Text="{Binding Price, StringFormat='Precio: {0:C2}'}"/>
+              <Label
+                VerticalOptions="Center"
+                TextColor="{StaticResource FontColor}"
+                Text="{Binding Stock, StringFormat='Stock: {0:N2}'}"/>
+            </StackLayout>
+          </Grid>
+        </ViewCell>
+      </DataTemplate>
+      <!--  -->
     </ResourceDictionary>
   </Application.Resources>
 </Application>

@@ -9,7 +9,7 @@
     <StackLayout Orientation="Horizontal">
       <Label
         Text = "E-Commerce"
-        TextColor="{StaticResource AccentColor1}"
+        TextColor="{StaticResource AccentColor}"
         FontSize="24"
         FontAttributes="Bold"
         HorizontalOptions="StartAndExpand"
