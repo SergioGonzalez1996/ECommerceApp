@@ -58,13 +58,13 @@ namespace ECommerceApp.Services
             }
         }
 
-        public async Task<List<Product>> GetProducts()
+        public async Task<List<T>> Get<T>(string controller) where T : class
         {
             try
             {
                 var client = new HttpClient();
                 client.BaseAddress = new Uri("http://zulu-software.com");
-                var url = "/ECommerce/api/Products";
+                var url = string.Format("/ECommerce/api/{0}", controller);
                 var response = await client.GetAsync(url);
 
                 if (!response.IsSuccessStatusCode)
@@ -73,8 +73,8 @@ namespace ECommerceApp.Services
                 }
 
                 var result = await response.Content.ReadAsStringAsync();
-                var products = JsonConvert.DeserializeObject<List<Product>>(result);
-                return products.OrderBy(p => p.Description).ToList();
+                var list = JsonConvert.DeserializeObject<List<T>>(result);
+                return list;
             }
             catch
             {

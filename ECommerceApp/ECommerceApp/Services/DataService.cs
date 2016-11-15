@@ -72,19 +72,19 @@ namespace ECommerceApp.Services
             }
         }
 
-        public void SaveProducts(List<Product> products)
+        public void Save<T>(List<T> list) where T : class
         {
             using (var da = new DataAccess())
             {
-                var oldProducts = da.GetList<Product>(false);
-                foreach (var product in oldProducts)
+                var oldRecords = da.GetList<T>(false);
+                foreach (var record in oldRecords)
                 {
-                    da.Delete(product);
+                    da.Delete(record);
                 }
 
-                foreach (var product in products)
+                foreach (var record in list)
                 {
-                    da.Insert(product);
+                    da.Insert(record);
                 }
             }
         }
@@ -100,11 +100,23 @@ namespace ECommerceApp.Services
             }
         }
 
-        public List<Product> GetProducts()
+        public List<Customer> GetCustomers(string filter)
         {
             using (var da = new DataAccess())
             {
-                return da.GetList<Product>(true).OrderBy(p => p.Description).ToList();
+                return da.GetList<Customer>(true)
+                    .OrderBy(c => c.FirstName)
+                    .ThenBy(c => c.LastName)
+                    .Where(c => c.FirstName.ToUpper().Contains(filter.ToUpper()) || c.LastName.ToUpper().Contains(filter.ToUpper()))
+                    .ToList();
+            }
+        }
+
+        public List<T> Get<T>(bool withChildren) where T : class
+        {
+            using (var da = new DataAccess()) 
+            {
+                return da.GetList<T>(withChildren).ToList();
             }
         }
 
