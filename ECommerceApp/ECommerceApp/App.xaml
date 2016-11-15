@@ -12,6 +12,8 @@
       <Color x:Key="AccentColor">#8C8979</Color>
       <Color x:Key="AccentColor1">#404040</Color>
       <Color x:Key="BackgroundColor">#F2F2F2</Color>
+      <Color x:Key="RedColor">#AB1A25</Color>
+      <Color x:Key="OrangeColor">#D97925</Color>
       <!-- Menu colors -->
       <Color x:Key="MenuColor">#262526</Color>
       <Color x:Key="MenuFontColor">#F2F2F2</Color>

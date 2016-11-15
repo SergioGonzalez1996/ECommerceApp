@@ -30,6 +30,7 @@ namespace ECommerceApp.ViewModels
         public ObservableCollection<CustomerItemViewModel> Customers { get; set; }
         public LoginViewModel NewLogin { get; set; }
         public UserViewModel UserLoged { get; set; }
+        public CustomerItemViewModel CurrentCustomer { get; set; }
 
         public string ProductsFilter
         {
@@ -90,6 +91,7 @@ namespace ECommerceApp.ViewModels
             // Create Views
             NewLogin = new LoginViewModel();
             UserLoged = new UserViewModel();
+            CurrentCustomer = new CustomerItemViewModel();
 
             // Load Data
             LoadMenu();
@@ -231,6 +233,11 @@ namespace ECommerceApp.ViewModels
         {
             var customers = dataService.Get<Customer>(true);
             ReloadCustomers(customers);
+        }
+
+        public void SetCurrentCustomer(CustomerItemViewModel customerItemViewModel)
+        {
+            CurrentCustomer = customerItemViewModel;
         }
         #endregion
 

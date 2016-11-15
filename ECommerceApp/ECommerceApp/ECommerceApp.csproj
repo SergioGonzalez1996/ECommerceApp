@@ -41,6 +41,7 @@
     <Compile Include="Classes\DataAccess.cs" />
     <Compile Include="Classes\OrderDetailRequest.cs" />
     <Compile Include="Classes\OrderRequest.cs" />
+    <Compile Include="Controls\BindablePicker.cs" />
     <Compile Include="Infrastructure\InstanceLocator.cs" />
     <Compile Include="Interfaces\IConfig.cs" />
     <Compile Include="Interfaces\INetworkConnection.cs" />
@@ -61,6 +62,9 @@
     <Compile Include="Models\State.cs" />
     <Compile Include="Models\Tax.cs" />
     <Compile Include="Models\User.cs" />
+    <Compile Include="Pages\CustomerDetailsPage.xaml.cs">
+      <DependentUpon>CustomerDetailsPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\CustomersPage.xaml.cs">
       <DependentUpon>CustomersPage.xaml</DependentUpon>
     </Compile>
@@ -97,7 +101,9 @@
     <Compile Include="Services\DialogService.cs" />
     <Compile Include="Services\NavigationService.cs" />
     <Compile Include="Services\NetService.cs" />
+    <Compile Include="ViewModels\CityItemViewModel.cs" />
     <Compile Include="ViewModels\CustomerItemViewModel.cs" />
+    <Compile Include="ViewModels\DepartmentItemViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\MenuItemViewModel.cs" />
@@ -181,7 +187,12 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="Pages\CustomerDetailsPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Pages\UserPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
