@@ -20,6 +20,7 @@ namespace ECommerceApp.ViewModels
         private NetService netService;
         private string productsFilter;
         private string customersFilter;
+        private bool isRefreshingCustomers;
         #endregion
 
         #region Events
@@ -72,6 +73,21 @@ namespace ECommerceApp.ViewModels
             get
             {
                 return customersFilter;
+            }
+        }
+        public bool IsRefreshingCustomers
+        {
+            set
+            {
+                if (isRefreshingCustomers != value)
+                {
+                    isRefreshingCustomers = value;
+                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("IsRefreshingCustomers"));
+                }
+            }
+            get
+            {
+                return isRefreshingCustomers;
             }
         }
         #endregion
@@ -138,13 +154,18 @@ namespace ECommerceApp.ViewModels
             ReloadCustomers(customers);
         }
 
-
         public ICommand NewCustomerCommand { get { return new RelayCommand(CustomerNew); } }
         private async void CustomerNew()
         {
             await navigationService.Navigate("NewCustomerPage");
         }
 
+        public ICommand RefreshCustomersCommand { get { return new RelayCommand(RefreshCustomers); } }
+        private void RefreshCustomers()
+        {
+            LoadCustomers();
+            IsRefreshingCustomers = false;
+        }
         #endregion
 
         #region Methods

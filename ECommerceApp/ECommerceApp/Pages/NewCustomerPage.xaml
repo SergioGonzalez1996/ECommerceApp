@@ -12,15 +12,12 @@
       BindingContext="{Binding NewCustomer}">
     <StackLayout
       Padding="8">
-      <StackLayout
-        Orientation="Horizontal">
         <controls:CircleImage
           Source="{Binding ImageSource}"
           Aspect="AspectFill"
           WidthRequest="200"
           HeightRequest="200">
         </controls:CircleImage>
-      </StackLayout>
       <StackLayout
         Orientation="Horizontal">
         <Label
@@ -162,20 +159,24 @@
           HorizontalOptions="FillAndExpand">
         </Entry>
       </StackLayout>
+      <ActivityIndicator
+        IsRunning="{Binding IsRunning, Mode=TwoWay}">
+      </ActivityIndicator>
       <StackLayout
         Orientation="Horizontal">
         <Button
-          Text="Actualizar"
-          TextColor="{StaticResource NewCustomerCommand}"
-          BackgroundColor="{StaticResource AccentColor}"
-          VerticalOptions="Guardar"
+          Command="{Binding NewCustomerCommand}"
+          Text="Guardar"
+          TextColor="{StaticResource BackgroundColor}"
+          BackgroundColor="{StaticResource AccentColor1}"
+          VerticalOptions="Center"
           HorizontalOptions="FillAndExpand">
         </Button>
         <Button
           Command="{Binding TakePictureCommand}"
           Text="Tomar Foto"
           TextColor="{StaticResource BackgroundColor}"
-          BackgroundColor="{StaticResource AccentColor1}"
+          BackgroundColor="{StaticResource OrangeColor}"
           VerticalOptions="Center"
           HorizontalOptions="FillAndExpand">
         </Button>

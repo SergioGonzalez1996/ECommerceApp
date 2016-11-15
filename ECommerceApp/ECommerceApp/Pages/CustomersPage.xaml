@@ -15,7 +15,11 @@
     <ListView
       ItemTemplate="{StaticResource CustomerItemTemplate}"
       ItemsSource="{Binding Customers}"
-      HasUnevenRows="True">
+      HasUnevenRows="True"
+      
+      IsPullToRefreshEnabled="True"
+      RefreshCommand="{Binding RefreshCustomersCommand}"
+      IsRefreshing="{Binding IsRefreshingCustomers, Mode=TwoWay}">
     </ListView>
   </StackLayout>
   <ContentPage.ToolbarItems>

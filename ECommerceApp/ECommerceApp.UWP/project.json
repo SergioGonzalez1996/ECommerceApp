@@ -3,6 +3,7 @@
     "Microsoft.NETCore.UniversalWindowsPlatform": "5.0.0",
     "MvvmLightLibs": "5.3.0",
     "Xam.Plugin.Geolocator": "3.0.4",
+    "Xam.Plugin.Media": "2.6.1",
     "Xam.Plugins.Forms.ImageCircle": "1.8.0.5",
     "Xamarin.Forms.Maps": "2.3.2.127"
   },

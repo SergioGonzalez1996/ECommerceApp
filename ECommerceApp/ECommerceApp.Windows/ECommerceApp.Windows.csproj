@@ -175,6 +175,14 @@
       <HintPath>..\..\packages\Xam.Plugin.Geolocator.3.0.4\lib\win8\Plugin.Geolocator.Abstractions.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Plugin.Media">
+      <HintPath>..\..\packages\Xam.Plugin.Media.2.6.1\lib\win8\Plugin.Media.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Plugin.Media.Abstractions">
+      <HintPath>..\..\packages\Xam.Plugin.Media.2.6.1\lib\win8\Plugin.Media.Abstractions.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Xamarin.Forms.Core, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Xamarin.Forms.2.3.2.127\lib\win81\Xamarin.Forms.Core.dll</HintPath>
       <Private>True</Private>

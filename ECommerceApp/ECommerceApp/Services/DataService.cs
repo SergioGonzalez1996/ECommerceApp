@@ -95,7 +95,8 @@ namespace ECommerceApp.Services
             {
                 return da.GetList<Product>(true)
                     .OrderBy(p => p.Description)
-                    .Where(p => p.Description.ToUpper().Contains(filter.ToUpper()))
+                    .Where(p => p.Description.ToUpper().Contains(filter.ToUpper()) ||
+                                p.BarCode.Contains(filter))
                     .ToList();
             }
         }
@@ -159,6 +160,22 @@ namespace ECommerceApp.Services
                     IsSucces = false,
                     Message = ex.Message,
                 };
+            }
+        }
+
+        public T Find<T>(int pk, bool withChildren) where T : class 
+        {
+            using (var da = new DataAccess())
+            {
+                return da.Find<T>(pk, withChildren);
+            }
+        }
+
+        public void Update<T>(T model) 
+        {
+            using (var da = new DataAccess())
+            {
+                da.Update(model);
             }
         }
     }

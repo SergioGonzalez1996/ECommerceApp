@@ -172,9 +172,13 @@
           HorizontalOptions="FillAndExpand">
         </Entry>
       </StackLayout>
+      <ActivityIndicator
+          IsRunning="{Binding IsRunning, Mode=TwoWay}">
+      </ActivityIndicator>
       <StackLayout
         Orientation="Horizontal">
         <Button
+          Command="{Binding UpdateCustomerLocationCommand}"
           Text="Localización"
           TextColor="{StaticResource BackgroundColor}"
           BackgroundColor="{StaticResource AccentColor}"
@@ -182,6 +186,7 @@
           HorizontalOptions="FillAndExpand">
         </Button>
         <Button
+          Command="{Binding UpdateCustomerCommand}"
           Text="Actualizar"
           TextColor="{StaticResource BackgroundColor}"
           BackgroundColor="{StaticResource OrangeColor}"
