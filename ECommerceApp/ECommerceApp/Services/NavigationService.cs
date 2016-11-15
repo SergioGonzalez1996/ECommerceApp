@@ -19,7 +19,7 @@ namespace ECommerceApp.Services
         }
         #endregion
 
-        #region Navigation
+        #region Navigation Method
         public async Task Navigate(string pageName)
         {
             App.Master.IsPresented = false;
@@ -46,6 +46,9 @@ namespace ECommerceApp.Services
                     break;
                 case "CustomerDetailsPage":
                     await App.Navigator.PushAsync(new CustomerDetailsPage());
+                    break;
+                case "NewCustomerPage":
+                    await App.Navigator.PushAsync(new NewCustomerPage());
                     break;
                 case "LogoutPage":
                     Logout();

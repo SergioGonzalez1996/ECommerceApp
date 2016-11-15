@@ -7,12 +7,14 @@ using System.ComponentModel;
 using System.Windows.Input;
 using System;
 using System.Linq;
+using Xamarin.Forms.Maps;
 
 namespace ECommerceApp.ViewModels
 {
     public class MainViewModel : INotifyPropertyChanged
     {
         #region Attributes
+        private NavigationService navigationService;
         private DataService dataService;
         private ApiService apiService;
         private NetService netService;
@@ -25,12 +27,14 @@ namespace ECommerceApp.ViewModels
         #endregion
 
         #region Properties
+        public ObservableCollection<Pin> Pins { get; set; }
         public ObservableCollection<MenuItemViewModel> Menu { get; set; }
         public ObservableCollection<ProductItemViewModel> Products { get; set; }
         public ObservableCollection<CustomerItemViewModel> Customers { get; set; }
         public LoginViewModel NewLogin { get; set; }
         public UserViewModel UserLoged { get; set; }
         public CustomerItemViewModel CurrentCustomer { get; set; }
+        public CustomerItemViewModel NewCustomer { get; set; }
 
         public string ProductsFilter
         {
@@ -79,11 +83,13 @@ namespace ECommerceApp.ViewModels
             instance = this;
 
             // Instance services
+            navigationService = new NavigationService();
             dataService = new DataService();
             apiService = new ApiService();
             netService = new NetService();
 
             // Create Observable Collections
+            Pins = new ObservableCollection<Pin>();
             Menu = new ObservableCollection<MenuItemViewModel>();
             Products = new ObservableCollection<ProductItemViewModel>();
             Customers = new ObservableCollection<CustomerItemViewModel>();
@@ -91,6 +97,7 @@ namespace ECommerceApp.ViewModels
             // Create Views
             NewLogin = new LoginViewModel();
             UserLoged = new UserViewModel();
+            NewCustomer = new CustomerItemViewModel();
             CurrentCustomer = new CustomerItemViewModel();
 
             // Load Data
@@ -130,6 +137,14 @@ namespace ECommerceApp.ViewModels
             Customers.Clear();
             ReloadCustomers(customers);
         }
+
+
+        public ICommand NewCustomerCommand { get { return new RelayCommand(CustomerNew); } }
+        private async void CustomerNew()
+        {
+            await navigationService.Navigate("NewCustomerPage");
+        }
+
         #endregion
 
         #region Methods
@@ -238,6 +253,20 @@ namespace ECommerceApp.ViewModels
         public void SetCurrentCustomer(CustomerItemViewModel customerItemViewModel)
         {
             CurrentCustomer = customerItemViewModel;
+        }
+
+        public void SetGeolotation(string name, string address, double latitude, double longitude )
+        {
+            Pins.Clear();
+            var position = new Position(latitude, longitude);
+            var pin = new Pin
+            {
+                Type = PinType.Place,
+                Position = position,
+                Label = name,
+                Address = address,
+            };
+            Pins.Add(pin);
         }
         #endregion
 

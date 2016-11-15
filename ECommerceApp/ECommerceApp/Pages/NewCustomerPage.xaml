@@ -1,35 +1,25 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="ECommerceApp.Pages.CustomerDetailsPage"
              xmlns:controls="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin.Abstractions"
              xmlns:control="clr-namespace:ECommerceApp.Controls"
-             xmlns:maps="clr-namespace:Xamarin.Forms.Maps;assembly=Xamarin.Forms.Maps"
-             Title="Detalles del Cliente"
+             x:Class="ECommerceApp.Pages.NewCustomerPage"
              BackgroundColor="{StaticResource BackgroundColor}"
-             BindingContext="{Binding Main, Source={StaticResource Locator}}">
+             BindingContext="{Binding Main, Source={StaticResource Locator}}"
+             Title="Nuevo Cliente">
+
   <ScrollView
-      BindingContext="{Binding CurrentCustomer}">
+      BindingContext="{Binding NewCustomer}">
     <StackLayout
       Padding="8">
       <StackLayout
         Orientation="Horizontal">
         <controls:CircleImage
-          Source="{Binding PhotoFullPath}"
+          Source="{Binding ImageSource}"
           Aspect="AspectFill"
-          WidthRequest="100"
-          HeightRequest="100"
-          VerticalOptions="Center"
-          HorizontalOptions="Start">
+          WidthRequest="200"
+          HeightRequest="200">
         </controls:CircleImage>
-        <Label
-          Text="{Binding FullName}"
-          TextColor="{StaticResource FontColor}"
-          FontSize="20"
-          FontAttributes="Bold"
-          VerticalOptions="Center"
-          HorizontalOptions="CenterAndExpand">
-        </Label>
       </StackLayout>
       <StackLayout
         Orientation="Horizontal">
@@ -175,35 +165,21 @@
       <StackLayout
         Orientation="Horizontal">
         <Button
-          Text="Localización"
-          TextColor="{StaticResource BackgroundColor}"
-          BackgroundColor="{StaticResource AccentColor}"
-          VerticalOptions="Center"
-          HorizontalOptions="FillAndExpand">
-        </Button>
-        <Button
           Text="Actualizar"
-          TextColor="{StaticResource BackgroundColor}"
-          BackgroundColor="{StaticResource OrangeColor}"
-          VerticalOptions="Center"
+          TextColor="{StaticResource NewCustomerCommand}"
+          BackgroundColor="{StaticResource AccentColor}"
+          VerticalOptions="Guardar"
           HorizontalOptions="FillAndExpand">
         </Button>
         <Button
-          Command="{Binding DeleteCustomerCommand}"
-          Text="Borrar"
+          Command="{Binding TakePictureCommand}"
+          Text="Tomar Foto"
           TextColor="{StaticResource BackgroundColor}"
-          BackgroundColor="{StaticResource RedColor}"
+          BackgroundColor="{StaticResource AccentColor1}"
           VerticalOptions="Center"
           HorizontalOptions="FillAndExpand">
         </Button>
       </StackLayout>
-      <maps:Map
-        WidthRequest="320"
-        HeightRequest="400"
-        x:Name="MyMap"
-        IsShowingUser="true"
-        MapType="Hybrid">
-      </maps:Map>
     </StackLayout>
   </ScrollView>
 </ContentPage>

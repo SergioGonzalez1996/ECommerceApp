@@ -59,6 +59,7 @@ namespace ECommerceApp.UWP
                 rootFrame.NavigationFailed += OnNavigationFailed;
 
                 Xamarin.Forms.Forms.Init(e);
+                Xamarin.FormsMaps.Init("AIzaSyAkI477mJJbBDAV-ik2_pNpY9Owmao6rE8");
 
                 if (e.PreviousExecutionState == ApplicationExecutionState.Terminated)
                 {
